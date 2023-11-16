@@ -3,12 +3,14 @@ unit Utils.Form;
 interface
 
 uses
-  System.Classes, Vcl.Mask, System.SysUtils, Vcl.DBGrids, Vcl.Graphics;
+  System.Classes, Vcl.Mask, System.SysUtils, Vcl.DBGrids, Vcl.Graphics,
+  Vcl.Controls;
 
 type
   TUtilsForm = class
-    class function ObterValorSemMascara(AComponente: TComponent): string;
-    class procedure AjustarColunasDBGrid(ADBGrid: TDBGrid);
+    class procedure AjustarColunasDBGrid(ADBGrid: TDBGrid); static;
+    class procedure CentralizarComponenteVertical(AComponente: TWinControl); static;
+    class procedure CentralizarComponenteHorinzontal(AComponente: TWinControl); static;
   end;
 
 implementation
@@ -63,12 +65,14 @@ begin
   end;
 end;
 
-class function TUtilsForm.ObterValorSemMascara(AComponente: TComponent): string;
+class procedure TUtilsForm.CentralizarComponenteHorinzontal(AComponente: TWinControl);
 begin
-  var Mascara := TMaskEdit(AComponente).EditMask;
-  TMaskEdit(AComponente).EditMask := EmptyStr;
-  Result := TMaskEdit(AComponente).Text;
-  TMaskEdit(AComponente).EditMask := Mascara;
+  AComponente.Left:= (AComponente.Parent.ClientWidth - AComponente.Width) div 2;
+end;
+
+class procedure TUtilsForm.CentralizarComponenteVertical(AComponente: TWinControl);
+begin
+  AComponente.Top:= (AComponente.Parent.ClientHeight - AComponente.Height ) div 2;
 end;
 
 end.

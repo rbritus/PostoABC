@@ -15,14 +15,14 @@ type
     class function ObterSqlParamsInsert(AObject: TEntidade): String; static;
     class function ObterSqlFieldsUpdate(AObject: TEntidade): String; static;
   public
-    class function ObterNomeTabela(AObject: TEntidade): string;
-    class function ObterSelecPorWhereID(AObject: TEntidade): string;
-    class function ObterSelecComWhere(AObject: TEntidade): string;
-    class function ObterSelecSemWhere(AObject: TEntidade): string;
-    class function ObterInsertSQL(AObject: TEntidade): string;
-    class function ObterUpdateSQL(AObject: TEntidade): string;
-    class function ObterDeleteSQL(AObject: TEntidade): string;
-    class procedure ObterListaDeParameter(var Value: TDictionary<String, Variant>; AObject: TEntidade);
+    class function ObterNomeTabela(AObject: TEntidade): string; static;
+    class function ObterSelecPorWhereID(AObject: TEntidade): string; static;
+    class function ObterSelecComWhere(AObject: TEntidade): string; static;
+    class function ObterSelecSemWhere(AObject: TEntidade): string; static;
+    class function ObterInsertSQL(AObject: TEntidade): string; static;
+    class function ObterUpdateSQL(AObject: TEntidade): string; static;
+    class function ObterDeleteSQL(AObject: TEntidade): string; static;
+    class procedure ObterListaDeParameter(var Value: TDictionary<String, Variant>; AObject: TEntidade); static;
   end;
 
 implementation
@@ -109,6 +109,9 @@ begin
           end;
         tkFloat:
           begin
+            if I.GetValue(AObject).TypeInfo = TypeInfo(TDate) then
+              Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ', ';
+
             if I.GetValue(AObject).TypeInfo = TypeInfo(TDateTime) then
               Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ', ';
 
@@ -159,6 +162,9 @@ begin
           end;
         tkFloat:
           begin
+            if I.GetValue(AObject).TypeInfo = TypeInfo(TDate) then
+              Result := Result + I.GetAttribute<Campo>.Name + ', ';
+
             if I.GetValue(AObject).TypeInfo = TypeInfo(TDateTime) then
               Result := Result + I.GetAttribute<Campo>.Name + ', ';
 
@@ -209,6 +215,9 @@ begin
           end;
         tkFloat:
           begin
+            if I.GetValue(AObject).TypeInfo = TypeInfo(TDate) then
+              Result := Result + ':' + I.GetAttribute<Campo>.Name + ', ';
+
             if I.GetValue(AObject).TypeInfo = TypeInfo(TDateTime) then
               Result := Result + ':' + I.GetAttribute<Campo>.Name + ', ';
 
@@ -257,6 +266,9 @@ begin
           end;
         tkFloat:
           begin
+            if I.GetValue(AObject).TypeInfo = TypeInfo(TDate) then
+              Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ' AND ';
+
             if I.GetValue(AObject).TypeInfo = TypeInfo(TDateTime) then
               Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ' AND ';
 
@@ -326,6 +338,9 @@ begin
           end;
         tkFloat:
           begin
+            if I.GetValue(AObject).TypeInfo = TypeInfo(TDate) then
+              Value.Add(I.GetAttribute<Campo>.Name, StrToDate(I.GetValue(AObject).ToString));
+
             if I.GetValue(AObject).TypeInfo = TypeInfo(TDateTime) then
               Value.Add(I.GetAttribute<Campo>.Name, StrToDateTime(I.GetValue(AObject).ToString));
 

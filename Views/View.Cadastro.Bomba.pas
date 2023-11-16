@@ -26,7 +26,7 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnPesquisarBombasClick(Sender: TObject);
     procedure btnPesquisarTanquesClick(Sender: TObject);
-    procedure edtCodigoTanqueExit(Sender: TObject);
+    procedure edtPrecoKeyPress(Sender: TObject; var Key: Char);
   private
     procedure Atualizar;
     procedure ConsultarRegistro;
@@ -45,7 +45,9 @@ implementation
 uses
   Conexao.unConection,
   Controller.Entidades,
-  View.Consulta.Generica;
+  View.Consulta.Generica,
+  Utils.Constants,
+  Utils.Validacoes;
 
 {$R *.dfm}
 
@@ -59,6 +61,7 @@ begin
       .SetNumero(StrToIntDef(edtNumero.Text,0))
       .SetPreco(StrToCurrDef(edtPreco.Text,0))
       .SetIDTanque(StrToIntDef(edtCodigoTanque.Text,0))
+    .Validacao
     .DAO
       .Atualizar;
 
@@ -142,7 +145,7 @@ begin
     FID := lDataset.FieldByName('ID').AsInteger;
     edtCodigo.Text := FID.ToString;
     edtNumero.Text := lDataset.FieldByName('NUMERO').AsInteger.ToString;
-    edtPreco.Text := lDataset.FieldByName('PRECO').AsCurrency.ToString;
+    edtPreco.Text := lDataset.FieldByName('PRECO').AsFloat.ToString;
     edtCodigoTanque.Text := lDataset.FieldByName('ID_TANQUE').AsInteger.ToString;
     CarregarDescricaoTanque;
     btnExcluir.Enabled := True;
@@ -174,13 +177,11 @@ begin
   end;
 end;
 
-procedure TViewCadastroBomba.edtCodigoTanqueExit(Sender: TObject);
+procedure TViewCadastroBomba.edtPrecoKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  CarregarDescricaoTanque;
-
-  if Trim(edtDescricaoTanque.Text).IsEmpty then
-    edtCodigoTanque.Clear;
+  if not TUtilsValidacoes.SomenteNumerosEVirgula(Key) then
+    Key := #0;
 end;
 
 procedure TViewCadastroBomba.FormShow(Sender: TObject);
@@ -196,6 +197,7 @@ begin
       .SetNumero(StrToIntDef(edtNumero.Text,0))
       .SetPreco(StrToCurrDef(edtPreco.Text,0))
       .SetIDTanque(StrToIntDef(edtCodigoTanque.Text,0))
+    .Validacao
     .DAO
       .Inserir;
 

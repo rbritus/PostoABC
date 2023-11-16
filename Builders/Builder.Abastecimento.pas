@@ -12,8 +12,8 @@ type
   ['{73045839-DB31-47A7-9EA0-7BEF8E9D8E2A}']
     function SetID(const Value: Integer): IBuilderAbastecimento;
     function GetID: Integer;
-    function SetDataHora(const Value: TDateTime): IBuilderAbastecimento;
-    function GetDataHora: TDateTime;
+    function SetData(const Value: TDate): IBuilderAbastecimento;
+    function GetData: TDate;
     function SetIDBomba(const Value: Integer): IBuilderAbastecimento;
     function GetIDBomba: Integer;
     function SetQuantidadeLitros(const Value: Double): IBuilderAbastecimento;
@@ -24,6 +24,7 @@ type
     function GetPercentualImposto: Double;
     function SetValor(const Value: Currency): IBuilderAbastecimento;
     function GetValor: Currency;
+    function Validacao: IBuilderAbastecimento;
     function DAO: IDAO;
   end;
 
@@ -35,8 +36,8 @@ type
   public
     function SetID(const Value: Integer): IBuilderAbastecimento;
     function GetID: Integer;
-    function SetDataHora(const Value: TDateTime): IBuilderAbastecimento;
-    function GetDataHora: TDateTime;
+    function SetData(const Value: TDate): IBuilderAbastecimento;
+    function GetData: TDate;
     function SetIDBomba(const Value: Integer): IBuilderAbastecimento;
     function GetIDBomba: Integer;
     function SetQuantidadeLitros(const Value: Double): IBuilderAbastecimento;
@@ -47,12 +48,16 @@ type
     function GetPercentualImposto: Double;
     function SetValor(const Value: Currency): IBuilderAbastecimento;
     function GetValor: Currency;
+    function Validacao: IBuilderAbastecimento;
     function DAO: IDAO;
 
     class function New: IBuilderAbastecimento;
   end;
 
 implementation
+
+uses
+  Core.Abastecimento;
 
 { TBuilderAbastecimento }
 
@@ -66,9 +71,9 @@ begin
   Result := TDAO.New(FAbastecimento);
 end;
 
-function TBuilderAbastecimento.GetDataHora: TDateTime;
+function TBuilderAbastecimento.GetData: TDate;
 begin
-  Result := FAbastecimento.GetDataHora;
+  Result := FAbastecimento.GetData;
 end;
 
 function TBuilderAbastecimento.GetID: Integer;
@@ -106,10 +111,10 @@ begin
   Result := Self.Create;
 end;
 
-function TBuilderAbastecimento.SetDataHora(const Value: TDateTime): IBuilderAbastecimento;
+function TBuilderAbastecimento.SetData(const Value: TDate): IBuilderAbastecimento;
 begin
   Result := Self;
-  FAbastecimento.SetDataHora(Value);
+  FAbastecimento.SetData(Value);
 end;
 
 function TBuilderAbastecimento.SetID(const Value: Integer): IBuilderAbastecimento;
@@ -146,6 +151,12 @@ function TBuilderAbastecimento.SetValor(const Value: Currency): IBuilderAbasteci
 begin
   Result := Self;
   FAbastecimento.SetValor(Value);
+end;
+
+function TBuilderAbastecimento.Validacao: IBuilderAbastecimento;
+begin
+  Result := Self;
+  TCoreAbastecimento.New(FAbastecimento).Validacao;
 end;
 
 end.

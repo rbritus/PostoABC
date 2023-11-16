@@ -1,6 +1,7 @@
 inherited ViewConsultaGenerica: TViewConsultaGenerica
   Caption = 'ViewConsultaGenerica'
   ClientHeight = 517
+  Position = poMainFormCenter
   OnCreate = FormCreate
   ExplicitHeight = 517
   TextHeight = 15
@@ -14,8 +15,8 @@ inherited ViewConsultaGenerica: TViewConsultaGenerica
   inherited Panel2: TPanel
     Top = 134
     Height = 335
-    ExplicitTop = 272
-    ExplicitHeight = 160
+    ExplicitTop = 134
+    ExplicitHeight = 335
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
@@ -35,6 +36,7 @@ inherited ViewConsultaGenerica: TViewConsultaGenerica
   end
   inherited Panel3: TPanel
     Top = 469
+    ExplicitTop = 469
     object btnSelecionar: TButton
       Left = 252
       Top = 8
@@ -52,18 +54,22 @@ inherited ViewConsultaGenerica: TViewConsultaGenerica
     Height = 86
     Align = alTop
     TabOrder = 3
-    ExplicitLeft = -200
-    ExplicitTop = 144
+    ExplicitTop = 48
+    ExplicitWidth = 640
     inherited pnlFundo: TPanel
       Width = 640
+      ExplicitWidth = 640
       inherited pnlConteudo: TPanel
         Width = 640
+        ExplicitWidth = 640
         inherited pnlFiltros: TPanel
           Width = 640
+          ExplicitWidth = 640
         end
       end
       inherited pnlPesquisa: TPanel
         Width = 636
+        ExplicitWidth = 636
         inherited edtPesquisa: TEdit
           Width = 570
           ExplicitWidth = 570

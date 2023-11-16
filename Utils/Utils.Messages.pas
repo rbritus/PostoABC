@@ -11,9 +11,9 @@ type
   TUtilsMessages = class
   private
   public
-    class procedure ShowMessage(const AMensagem: string);
-    class procedure ShowMessageExcept(const AMensagem: string); static;
-    class function ShowMensagemConfirmacao(const AMessage: String): Boolean;
+    class procedure ShowMessage(const AMensagem: string); static;
+    class procedure ShowMessageExcept(const AMensagem: string); static; static;
+    class function ShowMensagemConfirmacao(const AMessage: String): Boolean; static;
   end;
 
 implementation

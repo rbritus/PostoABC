@@ -10,8 +10,8 @@ type
   ['{8B66D75B-6AB7-4F26-BDC7-299BED3FDD6E}']
     function SetID(const Value: Integer): IAbastecimento;
     function GetID: Integer;
-    function SetDataHora(const Value: TDateTime): IAbastecimento;
-    function GetDataHora: TDateTime;
+    function SetData(const Value: TDate): IAbastecimento;
+    function GetData: TDate;
     function SetIDBomba(const Value: Integer): IAbastecimento;
     function GetIDBomba: Integer;
     function SetQuantidadeLitros(const Value: Double): IAbastecimento;
@@ -29,8 +29,8 @@ type
   private
     [Campo('ID'), PK]
     FID: Integer;
-    [Campo('DATAHORA')]
-    FDataHora: TDateTime;
+    [Campo('DATA')]
+    FData: TDate;
     [Campo('ID_BOMBA'),FK]
     FIDBomba: Integer;
     [Campo('QUANTIDADE_LITROS')]
@@ -44,8 +44,8 @@ type
   public
     function SetID(const Value: Integer): IAbastecimento;
     function GetID: Integer;
-    function SetDataHora(const Value: TDateTime): IAbastecimento;
-    function GetDataHora: TDateTime;
+    function SetData(const Value: TDate): IAbastecimento;
+    function GetData: TDate;
     function SetIDBomba(const Value: Integer): IAbastecimento;
     function GetIDBomba: Integer;
     function SetQuantidadeLitros(const Value: Double): IAbastecimento;
@@ -64,9 +64,9 @@ implementation
 
 { TAbastecimento }
 
-function TAbastecimento.GetDataHora: TDateTime;
+function TAbastecimento.GetData: TDate;
 begin
-  Result := FDataHora;
+  Result := FData;
 end;
 
 function TAbastecimento.GetID: Integer;
@@ -104,10 +104,10 @@ begin
   Result := Self.Create;
 end;
 
-function TAbastecimento.SetDataHora(const Value: TDateTime): IAbastecimento;
+function TAbastecimento.SetData(const Value: TDate): IAbastecimento;
 begin
   Result := Self;
-  FDataHora := Value;
+  FData := Value;
 end;
 
 function TAbastecimento.SetID(const Value: Integer): IAbastecimento;

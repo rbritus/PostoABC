@@ -81,7 +81,7 @@ inherited ViewCadastroTanque: TViewCadastroTanque
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 2
     end
     object cmbCombustivel: TComboBox
       Left = 209
@@ -96,7 +96,7 @@ inherited ViewCadastroTanque: TViewCadastroTanque
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 3
       StyleElements = []
     end
     object btnPesquisarTanques: TBitBtn
@@ -106,7 +106,8 @@ inherited ViewCadastroTanque: TViewCadastroTanque
       Height = 48
       ImageIndex = 0
       Images = ImageList1
-      TabOrder = 3
+      TabOrder = 1
+      TabStop = False
       OnClick = btnPesquisarTanquesClick
     end
   end

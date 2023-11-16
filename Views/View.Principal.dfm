@@ -119,6 +119,7 @@ object ViewPrincipal: TViewPrincipal
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 1
+        OnClick = btnLancamentoAbastecimentoClick
       end
     end
     object Panel5: TPanel
@@ -250,6 +251,7 @@ object ViewPrincipal: TViewPrincipal
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 1
+        OnClick = Button1Click
       end
     end
   end
@@ -259,6 +261,7 @@ object ViewPrincipal: TViewPrincipal
     Width = 768
     Height = 482
     Align = alClient
+    AutoSize = True
     TabOrder = 2
     ExplicitWidth = 764
     ExplicitHeight = 481

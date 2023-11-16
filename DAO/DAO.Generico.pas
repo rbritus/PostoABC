@@ -8,6 +8,7 @@ uses
   Entidade.Padrao;
 type
   IDAO = interface
+  ['{A371A7F2-9CEB-4067-9DA5-3233E0F760FE}']
     function Listar: IDAO;
     function ListarPorId: IDAO;
     function ListarPor: IDAO;

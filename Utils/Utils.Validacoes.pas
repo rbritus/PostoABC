@@ -7,20 +7,28 @@ uses
 
 type
   TUtilsValidacoes = class
+  private
   public
-    class function SomenteNumeros(Key: Char): Boolean;
-    class function SomenteLetras(Key: Char): Boolean;
-    class function CPFValido(ACPF: string): Boolean;
-    class function CEPValido(ACEP: string): Boolean;
-    class function TelefoneValido(ANumero: string): Boolean;
+    class function SomenteNumerosEVirgula(Key: Char): Boolean; static;
+    class function SomenteNumeros(Key: Char): Boolean; static;
+    class function SomenteLetras(Key: Char): Boolean; static;
+    class function CPFValido(ACPF: string): Boolean; static;
+    class function CEPValido(ACEP: string): Boolean; static;
+    class function TelefoneValido(ANumero: string): Boolean; static;
+    class function RoundX(Value: Extended; Decimals: integer): Extended;
   end;
 
 implementation
 
 uses
-  Utils.Constants;
+  Utils.Constants, System.Math;
 
 { TUtilsEdit }
+
+class function TUtilsValidacoes.SomenteNumerosEVirgula(Key: Char): Boolean;
+begin
+  Result := CharInSet(key,['0'..'9', #8, ',']);
+end;
 
 class function TUtilsValidacoes.SomenteNumeros(Key: Char): Boolean;
 begin
@@ -91,6 +99,21 @@ begin
   end;
 
   Result := True;
+end;
+
+class function TUtilsValidacoes.RoundX(Value: Extended; Decimals: integer): Extended;
+var
+  Factor, Fraction: Extended;
+begin
+  Factor := IntPower(10, Decimals);
+  Value := StrToFloat(FloatToStr(Value * Factor));
+  Result := Int(Value);
+  Fraction := Frac(Value);
+  if Fraction >= 0.5 then
+    Result := Result + 1
+  else if Fraction <= -0.5 then
+    Result := Result - 1;
+  Result := Result / Factor;
 end;
 
 class function TUtilsValidacoes.TelefoneValido(ANumero: string): Boolean;

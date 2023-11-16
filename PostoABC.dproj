@@ -174,8 +174,21 @@
             <Form>ViewCadastroBomba</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Views\View.Cadastro.Abastecimento.pas">
+            <Form>ViewCadastroAbastecimento</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Repository\Repository.Abastecimento.pas"/>
+        <DCCReference Include="Cores\Core.Tanque.pas"/>
+        <DCCReference Include="Interfaces\Interfaces.Core.pas"/>
+        <DCCReference Include="Cores\Core.Bomba.pas"/>
+        <DCCReference Include="Cores\Core.Abastecimento.pas"/>
         <DCCReference Include="Views\View.Relatorio.Abastecimentos.pas">
             <Form>ViewRelatorioAbastecimentos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Reports\Report.Abastecimento.pas">
+            <Form>ReportAbastecimento</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

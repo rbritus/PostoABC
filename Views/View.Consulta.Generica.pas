@@ -68,7 +68,7 @@ end;
 function TViewConsultaGenerica.InformarCaption(ACaption: string): TViewConsultaGenerica;
 begin
   Result := Self;
-  Self.Caption := ACaption;
+  Panel1.Caption := ACaption;
 end;
 
 class function TViewConsultaGenerica.New: TViewConsultaGenerica;

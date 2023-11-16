@@ -48,7 +48,14 @@ uses
   Utils.Validacoes in 'Utils\Utils.Validacoes.pas',
   Interfaces.Controller.Frame.FiltroGride in 'Interfaces\Interfaces.Controller.Frame.FiltroGride.pas',
   View.Cadastro.Bomba in 'Views\View.Cadastro.Bomba.pas' {ViewCadastroBomba},
-  View.Relatorio.Abastecimentos in 'Views\View.Relatorio.Abastecimentos.pas' {ViewRelatorioAbastecimentos};
+  View.Cadastro.Abastecimento in 'Views\View.Cadastro.Abastecimento.pas' {ViewCadastroAbastecimento},
+  Repository.Abastecimento in 'Repository\Repository.Abastecimento.pas',
+  Core.Tanque in 'Cores\Core.Tanque.pas',
+  Interfaces.Core in 'Interfaces\Interfaces.Core.pas',
+  Core.Bomba in 'Cores\Core.Bomba.pas',
+  Core.Abastecimento in 'Cores\Core.Abastecimento.pas',
+  View.Relatorio.Abastecimentos in 'Views\View.Relatorio.Abastecimentos.pas' {ViewRelatorioAbastecimentos},
+  Report.Abastecimento in 'Reports\Report.Abastecimento.pas' {ReportAbastecimento};
 
 {$R *.res}
 
@@ -62,6 +69,8 @@ begin
   Application.CreateForm(TViewCadastroTanque, ViewCadastroTanque);
   Application.CreateForm(TViewConsultaGenerica, ViewConsultaGenerica);
   Application.CreateForm(TViewCadastroBomba, ViewCadastroBomba);
+  Application.CreateForm(TViewCadastroAbastecimento, ViewCadastroAbastecimento);
   Application.CreateForm(TViewRelatorioAbastecimentos, ViewRelatorioAbastecimentos);
+  Application.CreateForm(TReportAbastecimento, ReportAbastecimento);
   Application.Run;
 end.

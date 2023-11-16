@@ -29,6 +29,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnCadastroTanquesClick(Sender: TObject);
     procedure btnCadastroBombasClick(Sender: TObject);
+    procedure btnLancamentoAbastecimentoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
   public
 
@@ -44,7 +46,9 @@ uses
   Controller.Views,
   View.Cadastro.Aliquota,
   View.Cadastro.Tanque,
-  View.Cadastro.Bomba;
+  View.Cadastro.Bomba,
+  view.Cadastro.Abastecimento,
+  View.Relatorio.Abastecimentos;
 
 {$R *.dfm}
 
@@ -61,6 +65,16 @@ end;
 procedure TViewPrincipal.btnCadastroTanquesClick(Sender: TObject);
 begin
   ControllerView.ShowForm(TViewCadastroTanque);
+end;
+
+procedure TViewPrincipal.btnLancamentoAbastecimentoClick(Sender: TObject);
+begin
+  ControllerView.ShowForm(TViewCadastroAbastecimento);
+end;
+
+procedure TViewPrincipal.Button1Click(Sender: TObject);
+begin
+  ControllerView.ShowForm(TViewRelatorioAbastecimentos);
 end;
 
 procedure TViewPrincipal.FormShow(Sender: TObject);

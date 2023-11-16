@@ -30,6 +30,8 @@ type
    const CELULAR = '(99) 99999-9999;0;';
    const TELEFONE = '(99) 9999-9999;0;';
    const CEP = '99999\-999;0;';
+   const DATA_HORA = '!99/99/0000 !90:00:00;1;0';
+   const DATA_COMPLETA = '!99/99/0000;1;_';
   end;
 
   TConstantsDataHora = class
@@ -39,7 +41,6 @@ type
 
   TConstantsEntidade = class
   public
-   const TAMANHO_GUID = 100;
    const TAMANHO_CPF = 11;
    const TAMANHO_EMAIL = 200;
    const TAMANHO_NOME = 200;

@@ -16,6 +16,7 @@ type
     procedure btnGravarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure edtPercentualEnter(Sender: TObject);
+    procedure Panel2Resize(Sender: TObject);
   private
     FIDAliquota: Integer;
     function InsereRegistro: boolean;
@@ -56,11 +57,10 @@ end;
 
 procedure TViewCadastroAliquota.Atualizar;
 begin
-  var lPercentual := TUtilsForm.ObterValorSemMascara(edtPercentual).ToDouble;
   TControllerEntidades.New
     .Imposto
       .SetID(FIDAliquota)
-      .SetPercentual(lPercentual)
+      .SetPercentual(StrToFloat(edtPercentual.Text))
     .DAO
       .Atualizar;
 
@@ -69,10 +69,9 @@ end;
 
 procedure TViewCadastroAliquota.Gravar;
 begin
-  var lPercentual := TUtilsForm.ObterValorSemMascara(edtPercentual).ToDouble;
   TControllerEntidades.New
     .Imposto
-      .SetPercentual(lPercentual)
+      .SetPercentual(StrToFloat(edtPercentual.Text))
     .DAO
       .Inserir;
 
@@ -113,6 +112,12 @@ end;
 function TViewCadastroAliquota.InsereRegistro: boolean;
 begin
   Result := FIDAliquota = 0;
+end;
+
+procedure TViewCadastroAliquota.Panel2Resize(Sender: TObject);
+begin
+  inherited;
+  TUtilsForm.CentralizarComponenteHorinzontal(edtPercentual);
 end;
 
 end.

@@ -78,6 +78,7 @@ begin
       .SetID(FID)
       .SetDescricao(edtDescricao.Text)
       .SetCombustivel(lTipoCombustivel)
+    .Validacao
     .DAO
       .Atualizar;
 
@@ -91,6 +92,7 @@ begin
     .Tanques
       .SetDescricao(edtDescricao.Text)
       .SetCombustivel(lTipoCombustivel)
+    .Validacao
     .DAO
       .Inserir;
 
@@ -152,7 +154,7 @@ end;
 
 procedure TViewCadastroTanque.PrepararCombBoxCombustivel;
 begin
-  TEnumerator<TTipoCombustivel>.PopulateList(cmbCombustivel);
+  TUtilsEnumerator<TTipoCombustivel>.PopulateList(cmbCombustivel);
   cmbCombustivel.ItemIndex := 0;
 end;
 

@@ -18,6 +18,7 @@ type
     function GetPreco: Currency;
     function SetIDTanque(const Value: Integer): IBuilderBomba;
     function GetIDTanque: Integer;
+    function Validacao: IBuilderBomba;
     function DAO: IDAO;
   end;
 
@@ -35,12 +36,16 @@ type
     function GetPreco: Currency;
     function SetIDTanque(const Value: Integer): IBuilderBomba;
     function GetIDTanque: Integer;
+    function Validacao: IBuilderBomba;
     function DAO: IDAO;
 
     class function New: IBuilderBomba;
   end;
 
 implementation
+
+uses
+  Core.Bomba;
 
 { TBuilderBomba }
 
@@ -101,6 +106,12 @@ function TBuilderBomba.SetPreco(const Value: Currency): IBuilderBomba;
 begin
   Result := Self;
   FBomba.SetPreco(Value);
+end;
+
+function TBuilderBomba.Validacao: IBuilderBomba;
+begin
+  Result := Self;
+  TCoreBomba.New(FBomba).Validacao;
 end;
 
 end.

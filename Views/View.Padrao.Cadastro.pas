@@ -15,6 +15,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Panel3Resize(Sender: TObject);
   private
   protected
     FID: Integer;
@@ -29,7 +30,8 @@ var
 implementation
 
 uses
-  Conexao.unConection;
+  Conexao.unConection,
+  Utils.Form;
 
 {$R *.dfm}
 
@@ -56,6 +58,12 @@ end;
 function TViewPadraoCadastro.InsereRegistro: boolean;
 begin
   Result := FID = 0;
+end;
+
+procedure TViewPadraoCadastro.Panel3Resize(Sender: TObject);
+begin
+  inherited;
+  TUtilsForm.CentralizarComponenteHorinzontal(btnCancelar);
 end;
 
 end.

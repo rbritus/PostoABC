@@ -1,5 +1,6 @@
 inherited ViewPadraoCadastro: TViewPadraoCadastro
   Caption = 'ViewPadraoCadastro'
+  WindowState = wsMaximized
   OnCreate = FormCreate
   TextHeight = 15
   inherited Panel1: TPanel
@@ -13,6 +14,7 @@ inherited ViewPadraoCadastro: TViewPadraoCadastro
     ExplicitTop = 48
   end
   inherited Panel3: TPanel
+    OnResize = Panel3Resize
     object btnGravar: TButton
       Left = 88
       Top = 8
@@ -47,6 +49,7 @@ inherited ViewPadraoCadastro: TViewPadraoCadastro
       Top = 8
       Width = 137
       Height = 33
+      Anchors = [akTop, akRight]
       Caption = 'Excluir'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite

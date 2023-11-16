@@ -5,7 +5,8 @@ interface
 uses
   DAO.Generico,
   Entidade.Tanque,
-  Utils.Enumerators;
+  Utils.Enumerators,
+  Core.Tanque;
 
 type
   IBuilderTanque = interface
@@ -16,6 +17,7 @@ type
     function GetDescricao: String;
     function SetCombustivel(const Value: TTipoCombustivel): IBuilderTanque;
     function GetCombustivel: TTipoCombustivel;
+    function Validacao: IBuilderTanque;
     function DAO: IDAO;
   end;
 
@@ -31,6 +33,7 @@ type
     function GetDescricao: String;
     function SetCombustivel(const Value: TTipoCombustivel): IBuilderTanque;
     function GetCombustivel: TTipoCombustivel;
+    function Validacao: IBuilderTanque;
     function DAO: IDAO;
 
     class function New: IBuilderTanque;
@@ -86,6 +89,12 @@ function TBuilderTanque.SetID(const Value: Integer): IBuilderTanque;
 begin
   Result := Self;
   FTanque.SetID(Value);
+end;
+
+function TBuilderTanque.Validacao: IBuilderTanque;
+begin
+  Result := Self;
+  TCoreTanque.New(FTanque).Validacao;
 end;
 
 end.

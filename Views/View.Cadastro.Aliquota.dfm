@@ -1,6 +1,7 @@
 inherited ViewCadastroAliquota: TViewCadastroAliquota
   Caption = 'ViewCadastroAliquota'
   ClientHeight = 204
+  WindowState = wsMaximized
   OnShow = FormShow
   ExplicitHeight = 204
   TextHeight = 15
@@ -14,6 +15,7 @@ inherited ViewCadastroAliquota: TViewCadastroAliquota
   end
   inherited Panel2: TPanel
     Height = 108
+    OnResize = Panel2Resize
     ExplicitTop = 48
     ExplicitHeight = 108
     object edtPercentual: TEdit
@@ -57,6 +59,7 @@ inherited ViewCadastroAliquota: TViewCadastroAliquota
       Top = 8
       Width = 137
       Height = 33
+      Anchors = [akTop, akRight]
       Caption = 'Fechar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite

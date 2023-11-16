@@ -7,7 +7,7 @@ uses
   System.Variants, System.Classes, Vcl.StdCtrls;
 
 type
-  TEnumerator<T:record> = class
+  TUtilsEnumerator<T:record> = class
   private
     class function EnumTypeInfo: PTypeInfo; static;
     class function EnumParaInteiro(const Index: T): Integer;
@@ -30,18 +30,18 @@ implementation
 
 { TEnumerator<T> }
 
-class function TEnumerator<T>.EnumParaInteiro(const Index: T): Integer;
+class function TUtilsEnumerator<T>.EnumParaInteiro(const Index: T): Integer;
 begin
   Result := 0;
   System.Move(Index, Result, System.SizeOf(Index));
 end;
 
-class function TEnumerator<T>.EnumTypeInfo: PTypeInfo;
+class function TUtilsEnumerator<T>.EnumTypeInfo: PTypeInfo;
 begin
   Result := System.TypeInfo(T);
 end;
 
-class function TEnumerator<T>.GetCaption(const Indice: Integer): string;
+class function TUtilsEnumerator<T>.GetCaption(const Indice: Integer): string;
 var
   CustomAttribute: TCustomAttribute;
 begin
@@ -63,7 +63,7 @@ begin
   end;
 end;
 
-class function TEnumerator<T>.GetCustomSelect(const FieldName: string): string;
+class function TUtilsEnumerator<T>.GetCustomSelect(const FieldName: string): string;
 var
   CustomAttribute: TCustomAttribute;
 begin
@@ -84,7 +84,7 @@ begin
   Result :=  cSelect + ' END AS ' + Self.GetNameCustoField(FieldName);
 end;
 
-class function TEnumerator<T>.GetIndex(const Value: Variant): Integer;
+class function TUtilsEnumerator<T>.GetIndex(const Value: Variant): Integer;
 var
   CustomAttribute: TCustomAttribute;
 begin
@@ -106,12 +106,12 @@ begin
   end;
 end;
 
-class function TEnumerator<T>.GetNameCustoField(const FieldName: string): string;
+class function TUtilsEnumerator<T>.GetNameCustoField(const FieldName: string): string;
 begin
   Result := FieldName + '_CUSTOM';
 end;
 
-class function TEnumerator<T>.GetValue(const Index: T): TValue;
+class function TUtilsEnumerator<T>.GetValue(const Index: T): TValue;
 var
   CustomAttribute: TCustomAttribute;
 begin
@@ -134,13 +134,13 @@ begin
   end;
 end;
 
-class function TEnumerator<T>.GetValueToString(const Index: T): string;
+class function TUtilsEnumerator<T>.GetValueToString(const Index: T): string;
 begin
   var Value := Self.GetValue(Index);
   Result := Self.ObterValorTratadoParaString(Value);
 end;
 
-class function TEnumerator<T>.ObterValorTratadoParaString(
+class function TUtilsEnumerator<T>.ObterValorTratadoParaString(
   Value: TValue): String;
 begin
   case Value.Kind of
@@ -151,7 +151,7 @@ begin
   end;
 end;
 
-class procedure TEnumerator<T>.PopulateList(AList: TCustomCombo);
+class procedure TUtilsEnumerator<T>.PopulateList(AList: TCustomCombo);
 var
   CustomAttribute: TCustomAttribute;
 begin

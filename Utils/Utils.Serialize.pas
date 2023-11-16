@@ -8,8 +8,8 @@ uses
 
 type
   TUtilsSerialize = class
-    class function DataSetToEntidade(DataSet: TDataSet; Classe: TEntidadeClass): TEntidade;
-    class function DataSetToListaEntidade(DataSet: TDataSet; Classe: TEntidadeClass): TObjectList<TEntidade>;
+    class function DataSetToEntidade(DataSet: TDataSet; Classe: TEntidadeClass): TEntidade; static;
+    class function DataSetToListaEntidade(DataSet: TDataSet; Classe: TEntidadeClass): TObjectList<TEntidade>; static;
   end;
 
 implementation
