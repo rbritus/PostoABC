@@ -18,7 +18,6 @@ type
   private
     class var FInstance: TConexao;
     class var FConection: TFDConnection;
-    function GetConection: TFDConnection;
     function GetDriver: string;
     function GetSqlNextId: string;
     procedure PreencherQuery(AQuery: TQuery; const Params: TDictionary<String, Variant>);
@@ -26,6 +25,7 @@ type
     class function New: TConexao;
     procedure Commit;
     procedure Rollback;
+    function GetConection: TFDConnection;
     function GetQuery: TQuery;
     function GetNextId(TableName, CampoId: String): Integer;
     function GetQueryConsulta(ASql: String): TDataSet; overload;

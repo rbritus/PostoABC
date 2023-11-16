@@ -7,9 +7,16 @@ inherited ViewRelatorioAbastecimentos: TViewRelatorioAbastecimentos
   TextHeight = 15
   inherited Panel1: TPanel
     Caption = 'Relat'#243'rio de Abastecimentos'
+    inherited btnFechaForm: TButton
+      ExplicitLeft = 594
+      ExplicitTop = 6
+      ExplicitHeight = 36
+    end
   end
   inherited Panel2: TPanel
     Height = 269
+    ExplicitTop = 48
+    ExplicitHeight = 269
     object Label2: TLabel
       Left = 35
       Top = 19
@@ -72,6 +79,7 @@ inherited ViewRelatorioAbastecimentos: TViewRelatorioAbastecimentos
   inherited Panel3: TPanel
     Top = 317
     OnResize = Panel3Resize
+    ExplicitTop = 317
     object btnImprimir: TButton
       Left = 253
       Top = 8
@@ -85,6 +93,7 @@ inherited ViewRelatorioAbastecimentos: TViewRelatorioAbastecimentos
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      OnClick = btnImprimirClick
     end
   end
 end

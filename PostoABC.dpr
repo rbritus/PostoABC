@@ -55,7 +55,8 @@ uses
   Core.Bomba in 'Cores\Core.Bomba.pas',
   Core.Abastecimento in 'Cores\Core.Abastecimento.pas',
   View.Relatorio.Abastecimentos in 'Views\View.Relatorio.Abastecimentos.pas' {ViewRelatorioAbastecimentos},
-  Report.Abastecimento in 'Reports\Report.Abastecimento.pas' {ReportAbastecimento};
+  Report.Abastecimento in 'Reports\Report.Abastecimento.pas' {ReportAbastecimento},
+  DataModule.Abastecimento in 'Reports\DataModule.Abastecimento.pas' {DMAbastecimento: TDataModule};
 
 {$R *.res}
 
@@ -63,14 +64,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TViewPrincipal, ViewPrincipal);
-  Application.CreateForm(TViewPadrao, ViewPadrao);
-  Application.CreateForm(TViewCadastroAliquota, ViewCadastroAliquota);
-  Application.CreateForm(TViewPadraoCadastro, ViewPadraoCadastro);
-  Application.CreateForm(TViewCadastroTanque, ViewCadastroTanque);
-  Application.CreateForm(TViewConsultaGenerica, ViewConsultaGenerica);
-  Application.CreateForm(TViewCadastroBomba, ViewCadastroBomba);
-  Application.CreateForm(TViewCadastroAbastecimento, ViewCadastroAbastecimento);
-  Application.CreateForm(TViewRelatorioAbastecimentos, ViewRelatorioAbastecimentos);
-  Application.CreateForm(TReportAbastecimento, ReportAbastecimento);
   Application.Run;
 end.
