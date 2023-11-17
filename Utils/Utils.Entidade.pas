@@ -14,6 +14,7 @@ type
     class function ObterSqlFieldsInsert(AObject: TEntidade): String; static;
     class function ObterSqlParamsInsert(AObject: TEntidade): String; static;
     class function ObterSqlFieldsUpdate(AObject: TEntidade): String; static;
+    class function GetEnumerator(Field: TRttiField; Obj: TObject; Valor: Variant): TValue; static;
   public
     class function ObterNomeTabela(AObject: TEntidade): string; static;
     class function ObterSelecPorWhereID(AObject: TEntidade): string; static;
@@ -22,7 +23,9 @@ type
     class function ObterInsertSQL(AObject: TEntidade): string; static;
     class function ObterUpdateSQL(AObject: TEntidade): string; static;
     class function ObterDeleteSQL(AObject: TEntidade): string; static;
+    class function ObterObjetoGenerico(AObject: IInterface): IInterface; static;
     class procedure ObterListaDeParameter(var Value: TDictionary<String, Variant>; AObject: TEntidade); static;
+    class procedure PreencherEntidade(var AObj: TObject; DSet: TDataSet);
   end;
 
 implementation
@@ -44,6 +47,31 @@ begin
       Result := vTypRtti.GetAttribute<Tabela>.Name;
   finally
     vCtxRtti.Free;
+  end;
+end;
+
+class function TUtilsEntidade.ObterObjetoGenerico(AObject: IInterface): IInterface;
+var
+  AValue: TValue;
+  ctx: TRttiContext;
+  rType: TRttiType;
+  AMethCreate: TRttiMethod;
+  instanceType: TRttiInstanceType;
+  lObj: TObject;
+begin
+  ctx := TRttiContext.Create;
+  lObj := TObject(AObject);
+  rType := ctx.GetType(lObj.ClassInfo);
+  for AMethCreate in rType.GetMethods do
+  begin
+    if (AMethCreate.IsConstructor) and (Length(AMethCreate.GetParameters) = 0) then
+    begin
+      instanceType := rType.AsInstance;
+      AValue := AMethCreate.Invoke(instanceType.MetaclassType, []);
+      Result := AValue.AsInterface;
+
+      Exit;
+    end;
   end;
 end;
 
@@ -148,9 +176,6 @@ begin
     lTipo := lContexto.GetType(AObject.ClassInfo);
     for var I in lTipo.GetFields do
     begin
-      if I.TemAtributo<PK> then
-        Continue;
-
       if not I.TemAtributo<Campo>then
         Break;
 
@@ -201,9 +226,6 @@ begin
     typRtti := ctxRtti.GetType(AObject.ClassInfo);
     for var I in typRtti.GetFields do
     begin
-      if I.TemAtributo<PK> then
-        Continue;
-
       if not I.TemAtributo<Campo>then
         Break;
 
@@ -267,10 +289,12 @@ begin
         tkFloat:
           begin
             if I.GetValue(AObject).TypeInfo = TypeInfo(TDate) then
-              Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ' AND ';
+              if not (I.GetValue(AObject).AsExtended = 0) then
+                Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ' AND ';
 
             if I.GetValue(AObject).TypeInfo = TypeInfo(TDateTime) then
-              Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ' AND ';
+              if not (I.GetValue(AObject).AsExtended = 0) then
+                Result := Result + I.GetAttribute<Campo>.Name + ' = :' + I.GetAttribute<Campo>.Name + ' AND ';
 
             if I.GetValue(AObject).TypeInfo = TypeInfo(Currency) then
               if not (I.GetValue(AObject).AsCurrency = 0) then
@@ -313,6 +337,52 @@ begin
     end;
   finally
     Result := ' WHERE ' + Copy(Result, 0, Length(Result) - 4) + ' ';
+    lCtxRtti.Free;
+  end;
+end;
+
+class procedure TUtilsEntidade.PreencherEntidade(var AObj: TObject; DSet: TDataSet);
+begin
+  var lCtxRtti := TRttiContext.Create;
+  try
+    var lTipo := lCtxRtti.GetType(AObj.ClassInfo);
+    for var I in lTipo.GetFields do
+    begin
+      if not I.TemAtributo<Campo>then
+        Break;
+
+      if DSet.FieldByName(I.GetAttribute<Campo>.Name).IsNull then
+        Continue;
+
+      case I.GetValue(AObj).TypeInfo.Kind of
+        tkInteger, tkInt64:
+          begin
+            I.SetValue(AObj,DSet.FieldByName(I.GetAttribute<Campo>.Name).AsInteger);
+          end;
+        tkEnumeration:
+          begin
+            var Value: TValue := GetEnumerator(I,AObj,DSet.FieldByName(I.GetAttribute<Campo>.Name).AsInteger);
+            I.SetValue(AObj,Value);
+          end;
+        tkFloat:
+          begin
+            if I.GetValue(AObj).TypeInfo = TypeInfo(TDate) then
+              I.SetValue(AObj,DSet.FieldByName(I.GetAttribute<Campo>.Name).AsDateTime);
+
+            if I.GetValue(AObj).TypeInfo = TypeInfo(TDateTime) then
+              I.SetValue(AObj,DSet.FieldByName(I.GetAttribute<Campo>.Name).AsDateTime);
+
+            if I.GetValue(AObj).TypeInfo = TypeInfo(Currency) then
+              I.SetValue(AObj,DSet.FieldByName(I.GetAttribute<Campo>.Name).AsCurrency);
+
+            if I.GetValue(AObj).TypeInfo = TypeInfo(Double) then
+              I.SetValue(AObj,DSet.FieldByName(I.GetAttribute<Campo>.Name).AsFloat);
+          end;
+      else
+        I.SetValue(AObj,DSet.FieldByName(I.GetAttribute<Campo>.Name).AsString);
+      end;
+    end;
+  finally
     lCtxRtti.Free;
   end;
 end;
@@ -367,6 +437,22 @@ begin
     end;
   finally
     lContexto.Free;
+  end;
+end;
+
+class function TUtilsEntidade.GetEnumerator(Field: TRttiField; Obj: TObject; Valor: Variant): TValue;
+begin
+  Result := TValue.From(0);
+
+  for var CustomAttribute in Field.FieldType.GetAttributes do
+  begin
+    if CustomAttribute is TEnumAttribute then
+      if TEnumAttribute(CustomAttribute).Value = Valor then
+      begin
+        var Value := Field.GetValue(Obj);
+        Result := TValue.FromOrdinal(Value.TypeInfo, TEnumAttribute(CustomAttribute).Indice);
+        Break;
+      end;
   end;
 end;
 

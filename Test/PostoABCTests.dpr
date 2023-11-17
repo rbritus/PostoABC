@@ -23,7 +23,12 @@ uses
   Script.CriacaoTabelas in 'Classes\Script.CriacaoTabelas.pas',
   Script.ExclusaoTabelas in 'Classes\Script.ExclusaoTabelas.pas',
   TestCoreAbastecimento in 'UnitTestes\TestCoreAbastecimento.pas',
-  Core.Abastecimento in '..\Cores\Core.Abastecimento.pas';
+  Core.Abastecimento in '..\Cores\Core.Abastecimento.pas',
+  TestDAOImposto in 'UnitTestes\TestDAOImposto.pas',
+  DAO.Generico in '..\DAO\DAO.Generico.pas',
+  TestDAOTanque in 'UnitTestes\TestDAOTanque.pas',
+  TestDAOBomba in 'UnitTestes\TestDAOBomba.pas',
+  TestDAOAbastecimento in 'UnitTestes\TestDAOAbastecimento.pas';
 
 {$R *.RES}
 

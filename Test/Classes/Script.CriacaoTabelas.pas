@@ -39,24 +39,23 @@ begin
   TConexao.New.EnviarComando(GetSqlTabelaBomba);
   TConexao.New.EnviarComando(GetSqlTabelaImposto);
   TConexao.New.EnviarComando(GetSqlTabelaAbastecimento);
-  TConexao.New.Commit;
 end;
 
 function TScriptCriacaoTabela.GetSqlTabelaAbastecimento: string;
 begin
   Result := 'CREATE TABLE IF NOT EXISTS ABASTECIMENTO (ID INTEGER, DATA DATE NOT NULL, ID_BOMBA INTEGER NOT NULL, ' +
-            'QUANTIDADE_LITROS NUMERIC, PRECO NUMERIC, PERCENTUAL_IMPOSTO NUMERIC, VALOR NUMERIC);';
+            'QUANTIDADE_LITROS NUMERIC(10,2), PRECO NUMERIC(10,2), PERCENTUAL_IMPOSTO NUMERIC(10,2), VALOR NUMERIC(10,2));';
 end;
 
 function TScriptCriacaoTabela.GetSqlTabelaBomba: string;
 begin
-  Result := 'CREATE TABLE IF NOT EXISTS BOMBA (ID INTEGER NOT NULL, NUMERO INTEGER NOT NULL, PRECO NUMERIC, ' +
+  Result := 'CREATE TABLE IF NOT EXISTS BOMBA (ID INTEGER NOT NULL, NUMERO INTEGER NOT NULL, PRECO NUMERIC(10,2), ' +
             'ID_TANQUE  INTEGER NOT NULL);';
 end;
 
 function TScriptCriacaoTabela.GetSqlTabelaImposto: string;
 begin
-  Result := 'CREATE TABLE IF NOT EXISTS IMPOSTO ( ID INTEGER NOT NULL, PERCENTUAL NUMERIC NOT NULL);';
+  Result := 'CREATE TABLE IF NOT EXISTS IMPOSTO ( ID INTEGER NOT NULL, PERCENTUAL NUMERIC(10,2) NOT NULL);';
 end;
 
 function TScriptCriacaoTabela.GetSqlTabelaTanque: string;

@@ -17,7 +17,6 @@ type
   end;
 
 implementation
-
 { TRttiTypeHelper }
 
 function TRttiTypeHelper.GetAttibute<T>: T;
@@ -34,7 +33,6 @@ function TRttiTypeHelper.TemAtributo<T>: Boolean;
 begin
   Result := GetAttibute<T> <> nil;
 end;
-
 { TRttiFieldHelper }
 
 function TRttiFieldHelper.GetAttibute<T>: T;
@@ -53,3 +51,4 @@ begin
 end;
 
 end.
+

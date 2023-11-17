@@ -16,6 +16,7 @@ type
     function Atualizar: IDAO;
     function Inserir: IDAO;
     function ToDataSet: TDataSet;
+    function ToObject: IInterface;
   end;
 
   TDAO = class(TInterfacedObject, IDAO)
@@ -34,12 +35,13 @@ type
     function Atualizar: IDAO;
     function Inserir: IDAO;
     function ToDataSet: TDataSet;
+    function ToObject: IInterface;
   end;
 
 implementation
 
 uses
-  Utils.Entidade, Conexao.unConection;
+  Utils.Entidade, Conexao.unConection, Utils.Serialize;
 
 { TDAO }
 
@@ -60,6 +62,13 @@ end;
 function TDAO.ToDataSet: TDataSet;
 begin
   Result := FDataSet;
+end;
+
+function TDAO.ToObject: IInterface;
+begin
+  var lObj: IInterface := TUtilsEntidade.ObterObjetoGenerico(FObject);
+  TUtilsSerialize.DataSetToEntidade(FDataSet,lObj);
+  Result := lObj;
 end;
 
 destructor TDAO.Destroy;

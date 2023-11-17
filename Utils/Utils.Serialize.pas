@@ -8,36 +8,19 @@ uses
 
 type
   TUtilsSerialize = class
-    class function DataSetToEntidade(DataSet: TDataSet; Classe: TEntidadeClass): TEntidade; static;
-    class function DataSetToListaEntidade(DataSet: TDataSet; Classe: TEntidadeClass): TObjectList<TEntidade>; static;
+    class function DataSetToEntidade(DataSet: TDataSet; var AObjInterface: IInterface): IInterface; static;
   end;
 
 implementation
 
 { TUtilsSerialize }
 
-class function TUtilsSerialize.DataSetToEntidade(DataSet: TDataSet;
-  Classe: TEntidadeClass): TEntidade;
+class function TUtilsSerialize.DataSetToEntidade(DataSet: TDataSet; var AObjInterface: IInterface): IInterface;
+var
+  lObj: TObject;
 begin
-  Result := Classe.Create;
-//  TUtilsEntidade.PreencherEntidade(Result, DataSet);
-end;
-
-class function TUtilsSerialize.DataSetToListaEntidade(DataSet: TDataSet;
-  Classe: TEntidadeClass): TObjectList<TEntidade>;
-begin
-  var Lista := TObjectList<TEntidade>.Create;
-
-  DataSet.First;
-  while not DataSet.Eof do
-  begin
-    var Entidade := Classe.Create;
-//    TUtilsEntidade.PreencherEntidade(Entidade, DataSet);
-    Lista.Add(Entidade);
-
-    DataSet.Next;
-  end;
-  Result := Lista;
+  lObj := TObject(AObjInterface);
+  TUtilsEntidade.PreencherEntidade(lObj,DataSet);
 end;
 
 end.

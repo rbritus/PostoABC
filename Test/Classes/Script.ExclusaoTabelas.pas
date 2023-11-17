@@ -39,7 +39,6 @@ begin
   TConexao.New.EnviarComando(GetSqlTabelaBomba);
   TConexao.New.EnviarComando(GetSqlTabelaImposto);
   TConexao.New.EnviarComando(GetSqlTabelaAbastecimento);
-  TConexao.New.Commit;
 end;
 
 function TScriptExclusaoTabela.GetSqlTabelaAbastecimento: string;

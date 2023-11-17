@@ -20,13 +20,9 @@ type
 implementation
 
 procedure TestTCoreBomba.SetUp;
-const
-  INSERT_TANQUE = 'INSERT INTO TANQUE (ID, DESCRICAO) VALUES (1,''TAQNUE TESTE'')';
 begin
   inherited;
   TScriptCriacaoTabela.New.Executar;
-  TConexao.New.EnviarComando(INSERT_TANQUE);
-  TConexao.New.Commit;
 end;
 
 procedure TestTCoreBomba.TearDown;
@@ -56,7 +52,9 @@ var
   ABomba: IBomba;
 const
   ID_TANQUE = 1;
+  INSERT_TANQUE = 'INSERT INTO TANQUE (ID, DESCRICAO) VALUES (1,''TAQNUE TESTE'')';
 begin
+  TConexao.New.EnviarComando(INSERT_TANQUE);
   ABomba := TBomba.New
               .SetNumero(1)
               .SetPreco(10)
