@@ -54,9 +54,6 @@ begin
 
   if FAbastecimento.GetPreco <= 0 then
     TUtilsMessages.ShowMessageExcept('Informar o preço da bomba.');
-
-  if FAbastecimento.GetPreco <= 0 then
-    TUtilsMessages.ShowMessageExcept('Informar o preço da bomba.');
 end;
 
 end.

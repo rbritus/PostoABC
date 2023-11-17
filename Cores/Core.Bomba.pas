@@ -41,7 +41,7 @@ begin
   if FBomba.GetNumero = 0 then
     TUtilsMessages.ShowMessageExcept('Informar o número da bomba.');
 
-  if NumeroDaBombaJaUtilizado then
+  if (FBomba.GetID = 0) and NumeroDaBombaJaUtilizado then
     TUtilsMessages.ShowMessageExcept('Número informado para a bomba já está em uso, escolha outro.');
 
   if FBomba.GetPreco <= 0 then

@@ -67,6 +67,7 @@ begin
         raise Exception.Create(E.Message);
       end;
     end;
+    MyDataSet.Close;
   finally
     MyDataSet.DisposeOf;
   end;
@@ -85,6 +86,7 @@ begin
         raise Exception.Create(E.Message);
       end;
     end;
+    MyDataSet.Close;
   finally
     MyDataSet.DisposeOf;
   end;

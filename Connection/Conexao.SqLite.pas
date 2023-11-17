@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
-  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper,
   FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.FMXUI.Wait, Data.DB,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
   FireDAC.DApt, FireDAC.Comp.DataSet, System.IOUtils, inifiles;
@@ -41,11 +41,11 @@ procedure TConexaoSqLite.GetConexao;
 begin
   DriverLink := TFDPhysSQLiteDriverLink.Create(nil);
   Transaction := TFDTransaction.Create(nil);
+  Self.TxOptions.AutoCommit := False;
   Transaction.Connection := Self;
   Self.Params.Values['DriverID'] := 'SQLite';
   Self.Params.Values['Database'] := IncludeTrailingPathDelimiter(System.SysUtils.GetCurrentDir) + 'banco.db';
   Self.Connected := True;
-  Self.TxOptions.AutoCommit := False;
 end;
 
 class function TConexaoSqLite.GetSqlNextId: string;

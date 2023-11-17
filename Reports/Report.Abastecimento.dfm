@@ -223,16 +223,16 @@ object ReportAbastecimento: TReportAbastecimento
       object RLDBText2: TRLDBText
         Left = 96
         Top = 16
-        Width = 92
+        Width = 80
         Height = 16
         DataField = 'DESCRICAO'
         DataSource = DMAbastecimento.dscAbastecimentoEntreDatas
         Text = ''
       end
       object RLDBText3: TRLDBText
-        Left = 200
+        Left = 194
         Top = 16
-        Width = 49
+        Width = 62
         Height = 16
         Alignment = taCenter
         DataField = 'NUMERO'
@@ -248,13 +248,13 @@ object ReportAbastecimento: TReportAbastecimento
         AutoSize = False
         DataField = 'QUANTIDADE_LITROS'
         DataSource = DMAbastecimento.dscAbastecimentoEntreDatas
-        DisplayMask = '#.##'
+        DisplayMask = '#.## (L)'
         Text = ''
       end
       object RLDBText5: TRLDBText
-        Left = 455
+        Left = 479
         Top = 16
-        Width = 74
+        Width = 50
         Height = 16
         Alignment = taRightJustify
         DataField = 'PRECO'
@@ -265,7 +265,7 @@ object ReportAbastecimento: TReportAbastecimento
       object RLDBText6: TRLDBText
         Left = 554
         Top = 16
-        Width = 57
+        Width = 58
         Height = 16
         Alignment = taCenter
         AutoSize = False
@@ -325,14 +325,14 @@ object ReportAbastecimento: TReportAbastecimento
         Transparent = False
       end
       object RLDBResult2: TRLDBResult
-        Left = 277
+        Left = 267
         Top = 9
         Width = 184
         Height = 16
         Alignment = taRightJustify
         DataField = 'QUANTIDADE_LITROS'
         DataSource = DMAbastecimento.dscAbastecimentoEntreDatas
-        DisplayMask = '#.## L.'
+        DisplayMask = '#.## (L)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -13
